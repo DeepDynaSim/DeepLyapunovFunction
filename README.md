@@ -20,7 +20,7 @@ Clone the repository to your local machine:
 
 bash
 Copy code
-git clone https://github.com/your-username/lyapunov-function-approximation.git
+git clone [https://github.com/your-username/lyapunov-function-approximation.git](https://github.com/DeepDynaSim/DeepLyapunovFunction.git)
 cd lyapunov-function-approximation
 Usage
 Lyapunov Function Approximation:
