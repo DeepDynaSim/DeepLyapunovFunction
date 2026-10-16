@@ -33,6 +33,25 @@ For MATLAB, inspect `example_stability.m` and `evaluateStability.m` together. Ne
 
 A fitted scalar function or a sampled numerical check does not by itself establish a formal stability certificate over a continuous domain. Examine positivity, orbital-derivative conditions, the domain and the verification method for the specific system. The examples support method exploration and visual analysis.
 
+### Known limitations of the historical examples
+
+- The scalar and batched dynamics in `Lyapunov_Approximation_1.ipynb` differ: one cell uses `x1_dot=-x1^3`, while the batched cell uses `x1_dot=-x1-10*x2^2`. They must not be interpreted as evaluations of the same vector field without reconciling that choice.
+- The four-state notebook includes `x1_dot=-x1^2`. For a negative initial state, `x1(t)=x1(0)/(1+x1(0)*t)` has finite escape; `x1(0)=-0.5` is singular at `t=2`. Thus this example does not establish two-sided asymptotic stability of the origin. A low value-regression loss does not repair that problem.
+- `evaluateStability.m` differentiates `V` symbolically and therefore requires Symbolic Math Toolbox and a candidate that accepts symbolic inputs. An arbitrary trained network handle may not support this operation. Its Boolean result describes only the supplied finite sample set.
+- The first example in `example_stability.m` is a rotation: its quadratic candidate has zero orbital derivative and is expected to fail the requested strict negative-decay test. That failure does not prove the rotation is Lyapunov unstable.
+
+The MATLAB example now forms a full Cartesian grid rather than pairing identical coordinate lists. For an independent, strictly decreasing numerical example:
+
+```matlab
+axisValues = -1:0.5:1;
+[X1, X2] = meshgrid(axisValues, axisValues);
+domain = [X1(:)'; X2(:)'];
+passedSamples = evaluateStability(@(x) -x, ...
+    @(x) x(1)^2+x(2)^2, @(x) 2*sum(x.^2), domain);
+```
+
+Passing those samples is not a continuum certificate. The separate [structure-preserving neural Lyapunov repository](https://github.com/DeepDynaSim/structure-preserving-neural-lyapunov) contains explicit proof assumptions and a distinction between sampled evidence and validated verification.
+
 The current checkout does not include `export_to_onnx.py` or a complete Simulink integration workflow. ONNX export and deployment require an additional implementation.
 
 ## Contributing and citation

@@ -3,9 +3,12 @@ V = @(x) x(1)^2 + x(2)^2; % Example Lyapunov function
 h = @(x) 2*norm(x)^2; % Example h(x)
 
 % Define the domain for checking the conditions
-domain = [-2:0.1:2; -2:0.1:2]; % Example domain as a 2D grid
+axisValues = -2:0.1:2;
+[X1, X2] = meshgrid(axisValues, axisValues);
+domain = [X1(:)'; X2(:)']; % Full Cartesian grid, one state per column
 
-% Evaluate stability
+% The rotation has dot(V)=0 and should fail the requested strict decay test.
+% Evaluate the supplied finite samples
 isStable = evaluateStability(f, V, h, domain);
 
 % MATLAB Sample Code for Approximating Compositional Lyapunov Functions Using Deep Neural Networks

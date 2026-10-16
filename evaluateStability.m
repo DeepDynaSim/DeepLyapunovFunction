@@ -33,7 +33,7 @@ function isStable = evaluateStability(f, V, h, domain)
         end
     end
 
-    % If all conditions are satisfied
-    disp('The system is Lyapunov stable.');
+    % If all supplied finite-sample conditions are satisfied
+    disp('All supplied sample checks passed; this is not a continuum stability certificate.');
     isStable = true;
 end
