@@ -1,52 +1,50 @@
-# DeepLyapunovFunction
+# Neural Lyapunov Functions for Nonlinear Systems
 
-Efficient Computation of Lyapunov Functions Using Deep Neural Networks for the Assessment of Stability in Controller Design
+**DeepDynaSim collection | Learning and stability analysis | TensorFlow / MATLAB**
 
-Lyapunov Function Approximation and Analysis
+Explore deep neural-network approximations of Lyapunov functions and their orbital derivatives. This research and teaching repository contains two Python notebooks, MATLAB stability examples and a technical report.
 
-This repository contains a collection of codes for approximating Lyapunov functions using deep neural networks and integrating these approximations into control system simulations in Simulink. The project demonstrates the use of machine learning techniques in control theory, particularly for systems where traditional analytical methods are infeasible.
+## Repository map
 
-Contents
+| Resource | Purpose |
+| --- | --- |
+| [Lyapunov_Approximation_1.ipynb](Lyapunov_Approximation_1.ipynb) | Neural approximation example for a two-dimensional state |
+| [Lyapunov_Approximation_2.ipynb](Lyapunov_Approximation_2.ipynb) | Neural approximation example for a four-dimensional state |
+| [evaluateStability.m](evaluateStability.m) | MATLAB stability-condition evaluation helper |
+| [example_stability.m](example_stability.m) | Illustrative MATLAB workflow with placeholder training data |
+| [Technical report](Efficient%20Computation%20of%20Lyapunov%20Functions%20Using%20DNNs%20for%20the%20Assessment%20of%20Stability%20in%20Controller%20Design.pdf) | Method background and discussion |
 
-Lyapunov_Approximation_1.ipynb: TensorFlow code for approximating the Lyapunov function and computing its orbital derivative for a given dynamical system 1.
+## Getting started
 
-Lyapunov_Approximation_2.ipynb: TensorFlow code for approximating the Lyapunov function and computing its orbital derivative for a given dynamical system 2.
+The notebooks import TensorFlow, NumPy and Matplotlib. Open either notebook in a compatible Jupyter environment and review the system dynamics, sampling region, training objective and plotting cells before running them in order. Dependency versions are not pinned in this repository.
 
-Additional documentation and resources for integrating the model with Simulink will be added.
+```sh
+git clone https://github.com/DeepDynaSim/DeepLyapunovFunction.git
+cd DeepLyapunovFunction
+python -m venv .venv
+# Activate the environment using the command for your operating system.
+python -m pip install jupyter tensorflow numpy matplotlib
+python -m notebook
+```
 
-Getting Started
+For MATLAB, inspect `example_stability.m` and `evaluateStability.m` together. Neural-network functions in the example require the corresponding MATLAB toolbox. The random training targets and other placeholders must be adapted to the intended dynamical system.
 
-Prerequisites
+## Interpreting the examples
 
-Python 3.x
-TensorFlow 2.x
-tf2onnx
-NumPy
-Matplotlib
-Simulink (for integration with the ONNX model)
+A fitted scalar function or a sampled numerical check does not by itself establish a formal stability certificate over a continuous domain. Examine positivity, orbital-derivative conditions, the domain and the verification method for the specific system. The examples support method exploration and visual analysis.
 
-Usage
+The current checkout does not include `export_to_onnx.py` or a complete Simulink integration workflow. ONNX export and deployment require an additional implementation.
 
-Lyapunov Function Approximation:
+## Contributing and citation
 
-Run .py files to approximate the Lyapunov function and compute its orbital derivative.
+For a useful issue or contribution, include the notebook/file, environment versions, system equations, sampling settings and a minimal reproducible example. Cite the repository and the commit/version used in academic work. The existing [GPL-2.0 license](LICENSE) governs reuse.
 
-This script will also generate plots for visual analysis.
+Author contact retained from the original repository: Caglar Uyulan, caglaruyulan1@gmail.com.
 
-Exporting the Model:
+## Related work and collaboration
 
-Execute export_to_onnx.py to convert the trained model to the ONNX format.
+Explore related repositories: [AI Powered Software for Turbo Compressor Design](https://github.com/DeepDynaSim/AI-Powered-Software-for-Turbo-Compressor-Design) · [satellite thermal preview control](https://github.com/DeepDynaSim/satellite-thermal-preview-control).
 
-Simulink Integration:
+[DeepDynaSim](https://github.com/DeepDynaSim) is an engineering R&D and consulting company in İzmir, Türkiye, focused on physics-guided AI, simulation and control. For engineering collaboration: [support@deepdynasim.com](mailto:support@deepdynasim.com). For repository questions, use [Issues](https://github.com/DeepDynaSim/DeepLyapunovFunction/issues).
 
-Follow the provided documentation to import the ONNX model into Simulink and set up the custom block for the orbital derivative.
-
-Contributing
-
-Contributions to this project are welcome. Please ensure to update tests as appropriate.
-
-Contact
-
-Caglar Uyulan - caglaruyulan1@gmail.com
-
-Project Link: https://github.com/DeepDynaSim/DeepLyapunovFunction 
+Reuse follows the existing [LICENSE](LICENSE); academic authorship and third-party attribution remain with their respective creators.
